@@ -1,0 +1,22 @@
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiterX\innerp[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiterX\braket[3]{\langle}{\rangle}%
+  {#1\,\delimsize\vert\,\mathopen{}#2\,\delimsize\vert\,\mathopen{}#3}
+
+
+% just to make sure it exists
+\providecommand\given{}
+% can be useful to refer to this outside \Set
+\NewDocumentCommand\SetSymbol { O{} }{%
+  \nonscript\:#1\vert
+  \allowbreak
+  \nonscript\:
+  \mathopen{}
+}
+\DeclarePairedDelimiterX\Set[1]\{\}{%
+  \renewcommand\given{\SetSymbol[\delimsize]}
+  #1
+}
+
+\DeclareMathOperator\dd{d}

@@ -1,0 +1,72 @@
+% SHA of latest github commit
+\edef\githubSha{%
+  \directlua{
+    local version = os.getenv('GITHUB_SHA')
+    if version == nil then
+      version = 'local'
+    else
+      version = string.sub(version, 1, 8)
+    end
+    tex.sprint(version)
+  }
+}
+
+\documentclass[11pt]{article}
+
+% Line height 1.26
+\linespread{1.05}
+
+\usepackage{fontspec}
+
+\usepackage{mathtools, amssymb}
+\usepackage{unicode-math}
+
+\usepackage[english]{babel}
+
+% Font loading
+% -------------------------------------------- %
+\setmainfont{Tex Gyre Pagella}
+\defaultfontfeatures{% 
+  Scale=MatchLowercase,% 
+}                       
+\setmathfont{Tex Gyre Pagella Math}
+\setsansfont{TeX Gyre Heros}
+\setmonofont[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    Ligatures = {Common, Discretionary, TeX},
+    Extension=.ttf,
+  ]{Inconsolata}
+% -------------------------------------------- %
+
+\usepackage{float}
+
+% Hyperref setup
+% --------------------------------------------------------------- %
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\definecolor{LinkRed}{HTML}{80171F}
+\hypersetup{
+  pdfauthor={Utku Birkan},
+  pdftitle={\OPTTitle},
+  pdfsubject={quantum computing, computer science, graph theory},
+  colorlinks=true,
+  linkcolor=LinkRed,
+  urlcolor=LinkRed,
+}
+% --------------------------------------------------------------- %
+
+\usepackage{subcaption}
+
+% Hader and footer
+\usepackage{fancyhdr}
+
+% Titles
+\usepackage{titlesec}
+
+\usepackage{tabularx, booktabs}
+
+\usepackage{lipsum}
+
+\input{common/macros}
