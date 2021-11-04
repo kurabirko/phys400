@@ -22,9 +22,12 @@ jobs:
           extra_fonts: |
             ../fonts/*.ttf
 
+      - name: Rename PDF output (${{ matrix.documents }})
+        run: mv src/main.pdf src/${{ matrix.documents }}.pdf 
+
       - name: Upload build assets (${{ matrix.documents }})
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.documents }}.pdf
+          name: ${{ matrix.documents }}
           path: src/${{ matrix.documents }}.pdf
 
