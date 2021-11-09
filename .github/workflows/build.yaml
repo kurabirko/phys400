@@ -42,10 +42,10 @@ jobs:
         with:
           path: ./artifacts
 
-      - uses: marvinpinto/action-automatic-releases@latest
+      - uses: softprops/action-gh-release@v1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest
+          tag_name: latest
           prerelease: true
-          title: Latest Build
+          name: Latest Build
           files: ./artifacts/*/*.pdf
+          body: ''
