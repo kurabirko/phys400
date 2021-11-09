@@ -1,6 +1,7 @@
-name: Build
+name: release
 on:
   - push
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,7 +11,7 @@ jobs:
           - proposal
 
     steps:
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Build documents using LaTeX (${{ matrix.documents }})
         uses: xu-cheng/latex-action@v2
