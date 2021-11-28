@@ -13,23 +13,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Create links
+        run: sh create-links.sh
+
       - name: Build documents using LaTeX (${{ matrix.documents }})
         uses: xu-cheng/latex-action@v2
         with:
-          working_directory: src
+          working_directory: src/${{ matrix.documents }}
           latexmk_use_lualatex: true
-          root_file: ${{ matrix.documents }}/main.tex
+          root_file: main.tex
           extra_fonts: |
-            ../fonts/*.ttf
+            ../../fonts/*.ttf
 
       - name: Rename PDF output (${{ matrix.documents }})
-        run: mv src/main.pdf src/${{ matrix.documents }}.pdf 
+        run: mv src/${{ matrix.documents }}/main.pdf ${{ matrix.documents }}.pdf 
 
       - name: Upload build assets (${{ matrix.documents }})
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.documents }}
-          path: src/${{ matrix.documents }}.pdf
+          path: ${{ matrix.documents }}.pdf
 
   pre-release:
     runs-on: ubuntu-latest

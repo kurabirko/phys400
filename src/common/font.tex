@@ -1,0 +1,16 @@
+% Font loading
+% -------------------------------------------- %
+\usepackage{libertinus-otf}
+\usepackage{fontspec}
+
+\defaultfontfeatures{% 
+  Scale=MatchLowercase,% 
+}                       
+\setsansfont{TeX Gyre Heros}
+\setmonofont[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    Ligatures = {Common, Discretionary, TeX},
+    Extension=.ttf,
+  ]{Inconsolata}
+% -------------------------------------------- %

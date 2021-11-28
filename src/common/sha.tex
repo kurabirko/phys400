@@ -1,0 +1,12 @@
+% SHA of latest github commit
+\edef\githubSha{%
+  \directlua{
+    local version = os.getenv('GITHUB_SHA')
+    if version == nil then
+      version = 'local'
+    else
+      version = string.sub(version, 1, 7)
+    end
+    tex.sprint(version)
+  }
+}

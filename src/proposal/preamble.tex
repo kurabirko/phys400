@@ -1,5 +1,38 @@
+\usepackage{mathtools, amssymb}
+\usepackage{unicode-math}
+\usepackage[english]{babel}
+
+
+\input{common/font}
+
+% Line height 1.26
+\linespread{1.05}
+
+% Hyperref setup
+% --------------------------------------------------------------- %
+\usepackage{float}
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\definecolor{LinkRed}{HTML}{80171F}
+\hypersetup{
+  pdfauthor={Utku Birkan},
+  pdftitle={\OPTTitle},
+  pdfsubject={quantum computing, computer science, graph theory},
+  colorlinks=true,
+  linkcolor=LinkRed,
+  urlcolor=LinkRed,
+}
+% --------------------------------------------------------------- %
+
+\usepackage{biblatex}
+\addbibresource{common/refs.bib}
+
+\usepackage{subcaption}
+
 % Header and Footer
 % ------------------------------------------------------------------ %
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyfoot[C]{}
 \fancyhead[L]{\sffamily\MakeUppercase{PHYS400 \textbf{\OPTHeader}}}
@@ -9,5 +42,15 @@
 % ------------------------------------------------------------------ %
 
 % Titles
+% ------------------------------------------------------- %
+\usepackage{titlesec}
 \titlespacing*{\section}{0pt}{*2}{*1}
 \titleformat{\section}{\sffamily\Large\bfseries}{}{0pt}{}
+% ------------------------------------------------------- %
+
+
+\usepackage{tabularx, booktabs}
+
+\usepackage{lipsum}
+
+\input{common/macros}
