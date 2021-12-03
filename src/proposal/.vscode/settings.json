@@ -1,5 +1,53 @@
 {
     "latex-workshop.latex.outDir": "build",
+    "latex-workshop.latex.recipe.default": "first",
     "editor.tabSize": 2,
+    "editor.wordWrap": "on",
     "editor.insertSpaces": true,
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (lualatex)",
+            "tools": [
+                "lualatexmk"
+            ]
+        },
+        {
+            "name": "latexmk (lualatex) [Release]",
+            "tools": [
+                "lualatexmk_release"
+            ]
+        },
+
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "lualatexmk_release",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "GITHUB_REF_NAME": "refs/tags/release-test"
+            }
+        },
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+    ],
+    "ltex.language": "en-GB"
 }

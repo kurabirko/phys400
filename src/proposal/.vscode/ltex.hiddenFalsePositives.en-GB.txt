@@ -1,0 +1,1 @@
+{"rule":"ET_AL","sentence":"^\\QIssues regarding its scalability led Russendorf et. al. to introduce the one-way quantum computer \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}

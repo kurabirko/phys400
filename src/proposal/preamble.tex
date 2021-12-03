@@ -1,7 +1,15 @@
 \usepackage{mathtools, amssymb}
-\usepackage{unicode-math}
-\usepackage[english]{babel}
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
 
+\usepackage[british]{babel}
+\usepackage{csquotes}
+
+\usepackage[pass]{geometry}
+
+
+\directlua{
+  sha = require(package.searchpath('githubSha', './common/?.lua'))
+}
 
 \input{common/font}
 
@@ -22,35 +30,62 @@
   colorlinks=true,
   linkcolor=LinkRed,
   urlcolor=LinkRed,
+  citecolor=LinkRed,
 }
 % --------------------------------------------------------------- %
 
 \usepackage{biblatex}
 \addbibresource{common/refs.bib}
 
-\usepackage{subcaption}
+\usepackage{caption, subcaption}
+\captionsetup{width=0.9\linewidth}
 
 % Header and Footer
 % ------------------------------------------------------------------ %
 \usepackage{fancyhdr}
+
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
+
 \pagestyle{fancy}
 \fancyfoot[C]{}
 \fancyhead[L]{\sffamily\MakeUppercase{PHYS400 \textbf{\OPTHeader}}}
 \fancyhead[R]{\sffamily\MakeUppercase{2021 Fall}}
-\fancyfoot[L]{\sffamily \textcolor{lightgray}{Build: \texttt{\githubSha}}}
+\fancyfoot[L]{\sffamily \textcolor{lightgray}{\directlua{sha.print()}}}
 \fancyfoot[R]{\sffamily Page \thepage}
 % ------------------------------------------------------------------ %
 
-% Titles
+% Section Titles
 % ------------------------------------------------------- %
 \usepackage{titlesec}
 \titlespacing*{\section}{0pt}{*2}{*1}
 \titleformat{\section}{\sffamily\Large\bfseries}{}{0pt}{}
 % ------------------------------------------------------- %
 
+% Document Title
+% --------------------------------------------------------------------------------------- %
+\renewcommand\maketitle{
+  \begingroup
+  \renewcommand{\arraystretch}{1.2}
+  \vspace*{-6mm}
+  \noindent\sffamily\large
+  \begin{tabularx}{\textwidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} X @{} }
+    Name of the Student    & Utku Birkan \\
+    Name of the Supervisor & Sadi Turgut \\
+    Project Title          & \OPTTitle   
+  \end{tabularx}
+  \vspace{1.5mm}
+  \endgroup
+}
+% --------------------------------------------------------------------------------------- %
 
-\usepackage{tabularx, booktabs}
+
+
+\usepackage{tabularx, booktabs, multirow}
 
 \usepackage{lipsum}
 
 \input{common/macros}
+
+\usepackage{tikz}
+\usetikzlibrary{quantikz, fit}
