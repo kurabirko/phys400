@@ -23,6 +23,9 @@
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
 \definecolor{LinkRed}{HTML}{80171F}
+\definecolor{zx_red}{RGB}{232, 165, 165}
+\definecolor{zx_green}{RGB}{216, 248, 216}
+
 \hypersetup{
   pdfauthor={Utku Birkan},
   pdftitle={\OPTTitle},
@@ -34,11 +37,10 @@
 }
 % --------------------------------------------------------------- %
 
-\usepackage{biblatex}
-\addbibresource{common/refs.bib}
+\input{common/biblatex}
 
 \usepackage{caption, subcaption}
-\captionsetup{width=0.9\linewidth}
+\captionsetup{width=0.87\linewidth}
 
 % Header and Footer
 % ------------------------------------------------------------------ %
@@ -82,10 +84,13 @@
 
 
 \usepackage{tabularx, booktabs, multirow}
+\usepackage{parskip}
 
 \usepackage{lipsum}
+\usepackage{graphicx}
+
 
 \input{common/macros}
 
 \usepackage{tikz}
-\usetikzlibrary{quantikz, fit}
+\usetikzlibrary{quantikz, fit, graphs,graphs.standard}

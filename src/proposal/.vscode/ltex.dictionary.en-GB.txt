@@ -1,3 +1,4 @@
 qubit
 qubits
 et. al.
+Pauli
