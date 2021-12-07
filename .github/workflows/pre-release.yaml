@@ -6,10 +6,37 @@ on:
 
 jobs:
   build:
-    uses: kurabirko/phys400/.github/workflows/build.yaml@main
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        documents:
+          - proposal
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create links
+        run: bash create-links.sh
+
+      - name: Build documents using LaTeX (${{ matrix.documents }})
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: documents/${{ matrix.documents }}
+          latexmk_use_lualatex: true
+          root_file: main.tex
+          extra_fonts: ../../fonts/*.ttf
+
+      - name: Rename PDF output (${{ matrix.documents }})
+        run: mv documents/${{ matrix.documents }}/main.pdf ${{ matrix.documents }}.pdf 
+
+      - name: Upload build assets (${{ matrix.documents }})
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.documents }}
+          path: ${{ matrix.documents }}.pdf
 
   pre-release:
-    if: ${{ always() }}
     runs-on: ubuntu-latest
     needs: build
 
