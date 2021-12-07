@@ -8,9 +8,9 @@ function M.print()
   
   local version = os.getenv('GITHUB_SHA')
 
-  tex.sprint '\\begingroup Build: \\ttfamily ' ..
+  tex.sprint('\\begingroup Build: \\ttfamily ' ..
     string.sub(version, 1, 7) ..
-    ' \\endgroup'
+    ' \\endgroup')
 end
 
 return M
