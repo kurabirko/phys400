@@ -9,7 +9,6 @@ jobs:
       matrix:
         documents:
           - proposal
-          - interim
       fail-fast: false
 
     steps:
