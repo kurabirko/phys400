@@ -4,6 +4,7 @@
     "editor.tabSize": 2,
     "editor.wordWrap": "on",
     "editor.insertSpaces": true,
+    "grammarly.domain": "academic",
     "latex-workshop.latex.recipes": [
         {
             "name": "latexmk (lualatex)",

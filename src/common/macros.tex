@@ -1,5 +1,6 @@
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\p{(}{)}
 \DeclarePairedDelimiterX\innerp[2]{\langle}{\rangle}{#1,#2}
 \DeclarePairedDelimiterX\braket[3]{\langle}{\rangle}%
   {#1\,\delimsize\vert\,\mathopen{}#2\,\delimsize\vert\,\mathopen{}#3}
@@ -20,3 +21,5 @@
 }
 
 \DeclareMathOperator\dd{d}
+
+\newcommand\spaceScript[1]{\ensuremath{\scriptscriptstyle(#1)}}

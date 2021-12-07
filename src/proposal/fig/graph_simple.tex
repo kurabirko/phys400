@@ -1,0 +1,14 @@
+\begin{tikzpicture}[new set=import nodes]
+  \begin{scope}[nodes={
+    set=import nodes,
+  }]
+    \node (k1) at (0, 0) {$\ket{+^{\spaceScript{1}}}$};
+    \node (k2) [right=1cm of k1] {$\ket{+^{\spaceScript{2}}}$};
+    \node (k3) [below=1cm of k2] {$\ket{+^{\spaceScript{3}}}$};
+  \end{scope}
+
+  \graph [edges = {line width = 0.2mm}] {
+    (import nodes);
+    k1 -- ["$U_{12}$"]  k2 -- ["$U_{23}$"] k3;
+  };
+\end{tikzpicture}
