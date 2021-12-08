@@ -50,20 +50,39 @@
 % Document Title
 % --------------------------------------------------------------------------------------- %
 \renewcommand\maketitle{
-  \begingroup
-  \renewcommand{\arraystretch}{1.2}
-  \vspace*{-6mm}
-  \noindent\sffamily\large
-  \begin{tabularx}{\textwidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} X @{} }
-    Name of the Student    & Utku Birkan \\
-    Name of the Supervisor & Sadi Turgut \\
-    Project Title          & \OPTTitle   
-  \end{tabularx}
-  \vspace{1.5mm}
-  \endgroup
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+      \vspace*{3cm}
+
+      {\fontsize{38}{46}\LibertinusDisplay \OPTHeader}
+      \vspace{1.6cm}
+
+      \noindent\sffamily
+      \begin{tabularx}{0.6\linewidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} >{\raggedright\arraybackslash}X @{} }
+        Name of the Student    & Utku Birkan \\
+        Name of the Supervisor & Sadi Turgut \\
+        Project Title          & \OPTTitle   
+      \end{tabularx}
+      
+      \vfill
+      
+      \rule{0.4\linewidth}{0.6pt}\\
+      \textbf{PHYS400} 2021 Fall
+    \end{center}
+  \end{titlepage}
 }
 % --------------------------------------------------------------------------------------- %
 
+% TOC Stuff
+% --------------------------------------------- %
+\usepackage{titletoc}
+\titlecontents{section}[1em]
+  {\sffamily\bfseries}
+  {\thecontentslabel\enspace}
+  {}
+  {\mdseries\titlerule*[0.5pc]{.}\contentspage}
+% --------------------------------------------- %
 
 
 \usepackage{tabularx, booktabs, multirow}

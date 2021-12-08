@@ -1,0 +1,21 @@
+% Header and Footer
+% ------------------------------------------------------------------ %
+\usepackage{fancyhdr}
+
+\setlength{\headheight}{15pt}
+\addtolength{\topmargin}{-3pt}
+
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\fancyhead[L]{\sffamily\MakeUppercase{PHYS400 \textbf{\OPTHeader}}}
+\fancyhead[R]{\sffamily{2021 Fall}}
+\fancyfoot[L]{\sffamily \textcolor{lightgray}{\directlua{sha.print()}}}
+\fancyfoot[R]{\sffamily Page \thepage}
+% ------------------------------------------------------------------ %
+
+% Section Titles
+% ------------------------------------------------------- %
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{*2}{*1}
+\titleformat{\section}{\sffamily\Large\bfseries}{}{0pt}{}
+% ------------------------------------------------------- %
