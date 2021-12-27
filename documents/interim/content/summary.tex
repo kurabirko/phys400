@@ -1,1 +1,126 @@
 \section{Progress Summary}
+
+Six work packages span the timeline of this project. Since this project is primarily theoretical, we planned the first package to be a comprehensive review of the underlying concepts. Since graph states lie at the heart of measurement-based quantum computing, it is necessary to the terminology and some fundamental results. The second work package involves a literature review on measurement-based quantum computing. We discovered that since this subject is a major application area of stabilizer formalism and graph states in general, most of the available introductory materials on stabilizer formalism or graph states contain a review of measurement-based quantum at the very least. Furthermore, almost every resource on measurement-based quantum computing introduces the preliminary material, though with slightly different notations. Therefore we decided on overlapping the timelines of the first two work packages. 
+
+Graphs are mathematical objects commonly used in computer science that are composed of vertices and edges connecting them\cite{clrs}. A graph is defined by the set \(V\) of \(N\) vertices and \(E\) of \(M\) edges.
+\begin{equation}
+  V = \Set{1, 2, \dots, N} \quad\text{and}\quad E \subseteq [V]^2 \text{ where } \abs{E\,} = M
+\end{equation}
+Since we do not define an order among the vertices that are connected by an edge, an edge is used only to denote \emph{connectivity}. Two vertices \(a, b \in V\) are called adjacent if there is an edge connecting them. A \emph{neighborhood} of a vertex \(a \in V\) is the set of all other vertices that are connected to it. 
+\begin{equation}
+  N_a = \Set{\,b\in V \given \Set{a, b}\in E\,}
+\end{equation}
+
+A subtype of graphs is \emph{simple graphs} that contain no loops---edges connecting a vertex to itself---or multiple edges between any two vertices\cite{hein2006}. We mainly deal with simple graphs in this paper. 
+
+Simple graphs can represent the interactions of some qubit-based quantum systems. These systems, which we use to describe the structure of measurement-based quantum computers, are called \emph{graphs states}. One of the two ways of defining a graph state is by its interaction patterns. A graph state describing the graph \(G=\p{V, E}\) is made up of qubits that are labelled by the vertices of \(G\). The interaction pattern of the qubits \(a\) and \(b\) connected by an edge in \(E\) is an Ising interaction. We also impose the following conditions.
+
+\begin{enumerate}
+  \item Since an edge only denotes connectivity, all two-particle unitaries that involve an edge must commute 
+  \begin{equation}
+    [U_{ab}, U_{bc}] = 0 \quad \forall a, b, c \in V
+  \end{equation}
+  \item Since edges do not denote a direction, unitaries must be symmetric 
+  \begin{equation}
+    [U_{ab}, U_{ba}] = 0 \quad \forall a, b \in V
+  \end{equation}
+  \item All the particles must interract through the same unitary.
+\end{enumerate}
+
+The general form of such an interaction pattern is given by the following unitary, parameterized by the \emph{interraction strength}.
+\begin{equation}
+  U_{ab}^I(\psi_{ab}) = e^{-i \psi_{ab} \, \sigma_z^a \, \sigma_z^b}
+\end{equation}
+This interraction pattern is useful to us because of the entanglement patterns it produces. Note that such a unitary with parameter \(\psi_{ab}\) is equivalent to a controlled \(\sigma_z\) gate---denoted by \(\cz\)---up to some additional \(\pi/4\)-rotations around the \(z\) axis for each qubit.
+\begin{equation}
+  \begin{aligned}
+  e^{-i\frac{\pi}{4}} e^{i\sigma_z^a\frac{\pi}{4}} e^{i\sigma_z^b\frac{\pi}{4}} U^I_{ab}\p*{\frac{\pi}{4}} &= e^{-i\frac{\pi}{4}} e^{i\sigma_z^a\frac{\pi}{4}} e^{i\sigma_z^b\frac{\pi}{4}} e^{-i \frac{\pi}{4} \, \sigma_z^a \, \sigma_z^b}\\
+  &= e^{-i\frac{\pi}{4}}\\
+  &= \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & -1
+  \end{bmatrix}
+\end{aligned}
+\end{equation}
+Using \(\cz\) to construct edges makes sure that the resulting edege
+\begin{equation}
+  U_{ab}\ket+^a\ket+^b = \frac{1}{\sqrt2}(\ket0^a\ket+^b + \ket1^a\ket-^b) 
+\end{equation}
+is maximally entangled. Furhtermore \(U_{ab}\)\/ is Hermitian so it can be used to delete an edge as well.
+
+A graph state \(\ket{G}\) which correspond to the simple graph \(G=\p{V, E}\) is defined to be
+\begin{equation}
+  \ket{G} = \prod_{\p{a,b} \, \in E} U_{ab}\,\ket+^V,
+\end{equation}
+and is prepared via the following procedure
+\begin{enumerate}
+  \item For each vertex in \(V\), prepare the corresponding qubit with the positive \(\sigma_x\) eigenstate \(\ket+\).
+  \item For each edge \(\p{a,b}\in E\), apply \(U_{ab}\) to the system.
+\end{enumerate}
+
+\begin{figure}[bt]
+  \centering
+  \subcaptionbox{The diagram of \(G\)}[0.85\linewidth]{\input{{fig/graph.tikz}}}
+  \vspace{1em}
+  
+  \subcaptionbox{Interraction pattern representation of \(\ket{G}\)}[0.43\linewidth]{%
+    \begin{align*}
+      \ket{G} 
+      &= U_{24}U_{23}U_{12}\ket{+}^{\otimes 4} \\
+      &= \begin{aligned}[t]
+        &\ket0\ket0\ket0\ket+ -\ket0\ket0\ket1\ket-\\
+        &+\ket0\ket1\ket0\ket+ -\ket0\ket1\ket1\ket-\\
+        &+\ket1\ket0\ket0\ket+ +\ket1\ket0\ket1\ket-\\
+        &-\ket1\ket1\ket0\ket+ +\ket1\ket1\ket1\ket-
+      \end{aligned}
+  \end{align*}}
+  \hfill
+  \subcaptionbox{Stabilizer representation of \(\ket{G}\)}[0.43\linewidth]{%
+  \begin{gather*}
+    \sigma_x^1\sigma_z^2\\
+    \sigma_x^2\sigma_z^1\sigma_z^3\sigma_z^4\\
+    \sigma_x^3\sigma_z^2\\
+    \sigma_x^4\sigma_z^2
+  \end{gather*}}
+
+  \caption{Representations of the graph state \(\ket{G}\) which correspons to the graph \(G = \Set{V, E}\) where \(V = \Set{1,2,3}\) and \(E = \Set{\Set{1,2}, \Set{2,3}, \Set{2,4}}\)}\label{fig:graph_state}
+\end{figure}
+
+An alternative definition of graph states with a more compact representation uses stabilizer formalism\cite{caves2014}. A stabilizer is defined to be a commutative subgroup of the \(N\)-qubit Pauli group \(\symcal{P}^V\) over the qubits in \(V\) that does not contain \(-\id_V\) or \(\pm i\id_V\)\cite{Briegel_2001,pusey2011}. For a given simple graph \(G=\p{G, E}\), the corresponding graph state \(\ket{G}\) is defined as the unique and common eigenvector to the 
+set of independent commuting observables
+\begin{equation}
+  K_a = \paulix^a \pauliz^{N_a} = \paulix^a \prod_{b\in N_a} \pauliz^{b}
+\end{equation}
+with eigenvalues \(+1\). The commutative subgroup of \(\symcal{P}^B\) generated by the set \(\Set{K_a \given a \in V}\) is called \emph{the stabilizer of}\/ \(\ket{G}\). Due to the common eigenvalues of its generator, a stabilizer provides the following measurement outcome correlations.
+\begin{equation}
+  m_x^a\prod_{b\in N_a}m_z^b = 1
+\end{equation}
+
+A simple graph state, along with its interaction pattern and stabilizer definitions, is given in Figure\ref{fig:graph_state}.
+
+
+At the heart of the measurement-based computing paradigm lies the notion of a \emph{cluster}\cite{russendorf2001,russendorf2003}. A cluster is a \(d\)-dimensional array of qubits where every qubit interacts with its neighbours through Ising interactions. The state of a cluster \(\ket{C}\) is a graph state. The cluster provides a general substrate that can perform universal computation. Then, Pauli measurements are applied on the cluster to encode and process the data as needed. In the next phase of this project, we are going to introduce the specific procedures which are necessary to achive universal computation by simulating CNOT, H, \(z\)-rotation, general rotation and \(\pi/2\) phase gates.
+
+The third work package involves the preparation of introduction and method parts of the written report. It is yet to be completed and we are actively working on it. Due to the deadline extension of the interim report, we decided to shift the deadline of this work package as well. Lastly, there are no changes on the remaining work packages. The new timeline is given in Table \ref{tab:wp}.
+
+\begin{table}[hbt]
+  \centering
+  \newcommand\cc{\blacksquare}
+  \begin{tabular}{r @{\hspace{2em}}c c c c c c c c c c c c c c}
+    \toprule
+      & \multicolumn{13}{c}{Week} \\\cmidrule{2-14}
+    WP &  2 &  3 &  4 &  5 &  6 &  7 &  8 &  9 & 10 & 11 & 12 & 13 & 14 \\
+    \midrule
+    1 & \cc & \cc & \cc & \cc & \cc & \cc                                           \\
+    2 &     &     &     & \cc & \cc & \cc & \cc & \cc                               \\
+    3 &     &     &     &     & \cc & \cc & \cc & \cc & \cc                          \\
+    4 &     &     &     &     &     &     &     & \cc & \cc & \cc & \cc & \cc       \\
+    5 &     &     &     &     &     &     &     &     &     &     &     & \cc & \cc \\
+    6 &     &     &     &     &     &     &     &     &     &     & \cc & \cc & \cc \\
+    \bottomrule
+  \end{tabular}
+
+    \caption{Revised timeline of the project\label{tab:wp}}
+\end{table}

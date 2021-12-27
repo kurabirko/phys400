@@ -12,6 +12,7 @@ jobs:
       matrix:
         documents:
           - proposal
+          - interim
 
     steps:
       - uses: actions/checkout@v2

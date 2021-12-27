@@ -4,6 +4,7 @@
 \DeclarePairedDelimiterX\innerp[2]{\langle}{\rangle}{#1,#2}
 \DeclarePairedDelimiterX\braket[3]{\langle}{\rangle}%
   {#1\,\delimsize\vert\,\mathopen{}#2\,\delimsize\vert\,\mathopen{}#3}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 
 % just to make sure it exists
@@ -21,5 +22,12 @@
 }
 
 \DeclareMathOperator\dd{d}
+\DeclareMathOperator{\cnot}{\symtt{CNOT}}
+\DeclareMathOperator{\cz}{\symtt{CZ}}
+\DeclareMathOperator{\id}{I}
+\newcommand{\paulix}{{\sigma_x}}
+\newcommand{\pauliy}{{\sigma_y}}
+\newcommand{\pauliz}{{\sigma_z}}
+
 
 \newcommand\spaceScript[1]{\ensuremath{\scriptscriptstyle(#1)}}

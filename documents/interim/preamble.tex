@@ -55,11 +55,13 @@
     \begin{center}
       \vspace*{3cm}
 
-      {\fontsize{38}{46}\LibertinusDisplay \OPTHeader}
-      \vspace{1.6cm}
+      {\fontsize{40}{48}\LibertinusDisplay \OPTHeader}
+      \vspace{2cm}
 
       \noindent\sffamily
-      \begin{tabularx}{0.6\linewidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} >{\raggedright\arraybackslash}X @{} }
+      \newlength{\colWidth}
+      \settowidth{\colWidth}{\bfseries Name of the Supervisor}    
+      \begin{tabularx}{0.6\linewidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} >{\raggedright\arraybackslash}p{\colWidth} @{} }
         Name of the Student    & Utku Birkan \\
         Name of the Supervisor & Sadi Turgut \\
         Project Title          & \OPTTitle   
@@ -68,7 +70,7 @@
       \vfill
       
       \rule{0.4\linewidth}{0.6pt}\\
-      \textbf{PHYS400} 2021 Fall
+      \textbf{PHYS400} \ensuremath{\cdot} 2021 Fall
     \end{center}
   \end{titlepage}
 }
@@ -82,6 +84,7 @@
   {\thecontentslabel\enspace}
   {}
   {\mdseries\titlerule*[0.5pc]{.}\contentspage}
+
 % --------------------------------------------- %
 
 
@@ -96,3 +99,5 @@
 
 \usepackage{tikz}
 \usetikzlibrary{quantikz, fit, graphs,graphs.standard}
+
+\newcommand{\sectionbreak}{\clearpage}
