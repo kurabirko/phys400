@@ -1,0 +1,115 @@
+\usepackage{mathtools}
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+
+\usepackage[british]{babel}
+\usepackage{csquotes}
+
+% \usepackage[
+%   a4paper,
+%   left=30mm,right=30mm, bottom=30mm,
+%   includeheadfoot
+% ]{geometry}
+
+\directlua{
+  sha = require(package.searchpath('githubSha', './common/?.lua'))
+}
+
+\input{common/font}
+
+% Line height 1.26
+\linespread{1.05}
+
+
+\input{common/biblatex}
+
+\usepackage{caption, subcaption}
+\captionsetup{width=0.87\linewidth}
+
+\usepackage{wrapfig}
+
+\input{common/headersTitles}
+
+% Document Title
+% --------------------------------------------------------------------------------------- %
+\renewcommand\maketitle{
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+      \vspace*{3cm}
+
+      {\fontsize{40}{48}\LibertinusDisplay  \OPTHeader}
+      \vspace{2cm}
+
+      \noindent\sffamily
+      \newlength{\colWidth}
+      \settowidth{\colWidth}{\bfseries Name of the Supervisor}    
+      \begin{tabularx}{0.6\linewidth}{@{} >{\bfseries}l @{\hspace{6pt}:\hspace{6pt}} >{\raggedright\arraybackslash}p{\colWidth} @{} }
+        Name of the Student    & Utku Birkan \\
+        Name of the Supervisor & Sadi Turgut \\
+        Project Title          & \OPTTitle   
+      \end{tabularx}
+      
+      \vfill
+      
+      \rule{0.4\linewidth}{0.6pt}\\
+      \textbf{PHYS400} \ensuremath{\cdot} 2021 Fall
+    \end{center}
+  \end{titlepage}
+}
+% --------------------------------------------------------------------------------------- %
+
+% TOC Stuff
+% --------------------------------------------- %
+\usepackage{titletoc}
+\titlecontents{section}[.5em]
+  {\sffamily\bfseries}
+  {\thecontentslabel\enspace}
+  {}
+  {\mdseries\titlerule*[0.5pc]{.}\contentspage}
+\titlecontents{subsection}[2em]
+  {\sffamily\bfseries}
+  {\thecontentslabel\enspace}
+  {}
+  {\mdseries\titlerule*[0.5pc]{.}\contentspage}
+
+
+% --------------------------------------------- %
+
+
+\usepackage{tabularx, booktabs, multirow}
+\usepackage{parskip}
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+
+\input{common/macros}
+
+\usepackage{tikz}
+\usetikzlibrary{quantikz, fit, graphs,graphs.standard, graphdrawing}
+\usegdlibrary{trees,layered}
+
+
+% Hyperref setup
+% --------------------------------------------------------------- %
+\usepackage{float}
+\usepackage{xcolor}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\definecolor{LinkRed}{HTML}{80171F}
+\definecolor{zx_red}{RGB}{232, 165, 165}
+\definecolor{zx_green}{RGB}{216, 248, 216}
+
+\hypersetup{
+  pdfauthor={Utku Birkan},
+  pdftitle={\OPTTitle},
+  pdfsubject={quantum computing, computer science, graph theory},
+  colorlinks=true,
+  linkcolor=LinkRed,
+  urlcolor=LinkRed,
+  citecolor=LinkRed,
+}
+% --------------------------------------------------------------- %
+
+\usepackage{enumitem}
+
+\newcommand{\sectionbreak}{\clearpage}
