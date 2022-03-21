@@ -1,10 +1,38 @@
 \section{Results \& Discussion}
 
-Various results and some discussion over them.
+Our theoretical discussion provides an abstract machine to perform quantum computation using a measurement-based paradigm and implement circuit-based quantum algorithms using a measurement-based approach. We provide an implementation of Deutsch's algorithm below.
 
-\begin{tikzpicture}
-  \graph [nodes={draw}]{
-    h11/"X" -- h12/"Y" -- h13/"Y" -- h14/"Y";
-    x1/"X" -- h21/"X" -- h22/"Y" -- h23/"Y" -- h24/"Y";
-  };
-\end{tikzpicture}
+With a circuit based-formulation, Deutsch's algorithm takes a binary function \(f: \Set{0,1} \rightarrow \Set{0,1}\), and decides if it is constant or balanced. The oracle that implements the said function has the following form.
+\begin{equation}
+  U_f \, \ket{x}\ket{y} = \ket{x}\ket{y \oplus f(x)}
+\end{equation} 
+The oracle constructions that we have used are given in the Table \ref{tab:oracle}.
+
+\begin{table}[htb]
+  \center
+  \begin{tabular}{llr}
+    \toprule
+    Type & Function & Oracle Unitary  \\
+    \midrule
+    Constant & \(f(x) = 0\) & \(\symbb{I}\)\\
+    Constant & \(f(x) = 1\) & \(\sigma_x^1\) \\
+    Balanced & \(f(x) = x\) & \(\cnot\) \\
+    Balanced & \(f(x) = \neg x\) & \(\sigma_x^1\cnot\) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Deutsch's algorithm unitary oracle implementations}\label{tab:oracle}
+\end{table}
+
+The quantum circuit for the algorithm is given in Figure \ref{fig:deutsch_circuit}, based on \cite{Vallone2010}.
+
+\begin{figure}[hb]
+  \centering
+  \begin{quantikz}
+    \lstick{\(\ket+\)} & \qw & \qw & \gate[wires=2][2cm] {U_f} \gateinput{$x$} \gateoutput{$x$} & \gate{H} & \meter{} \\
+    \lstick{\(\ket+\)} & \gate{R_z(\pi)} &\gate{H} & \gateinput{$y$} \gateoutput{$y \oplus f(x)$} & \qw & \qw 
+  \end{quantikz}
+  \caption{Quantum cicruit implementing Deutsch's algorithm}\label{fig:deutsch_circuit}
+\end{figure}
+
+We used Paddle Quantum\cite{Paddlequantum} library for simulating our MBQC circuits. The library includes an early version of an MBQC simulator which allows creating a graph state, measuring its vertex qubits and removing by-products. We used the procedure described in the previous section to convert the quantum circuit gate by gate to a series of measurement patterns and removed by-products on each step. We were able to distinguish between constant and balanced functions successfully.
+

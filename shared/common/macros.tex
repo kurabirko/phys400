@@ -2,8 +2,8 @@
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\p{(}{)}
 \DeclarePairedDelimiterX\innerp[2]{\langle}{\rangle}{#1,#2}
-\DeclarePairedDelimiterX\braket[3]{\langle}{\rangle}%
-  {#1\,\delimsize\vert\,\mathopen{}#2\,\delimsize\vert\,\mathopen{}#3}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}%
+  {#1\, \delimsize\vert\,\mathopen{}#2}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 
@@ -22,7 +22,7 @@
 }
 
 \DeclareMathOperator\dd{d}
-\DeclareMathOperator{\cnot}{\symtt{CNOT}}
+\DeclareMathOperator{\cnot}{CNOT}
 \DeclareMathOperator{\cz}{\symtt{CZ}}
 \DeclareMathOperator{\id}{I}
 \newcommand{\paulix}{{\sigma_x}}

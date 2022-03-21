@@ -1,0 +1,85 @@
+\usepackage{mathtools}
+\usepackage{xfp}
+\usepackage{xfrac}
+
+\usepackage{adjustbox}
+\usepackage{subcaption}
+
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+\defaultfontfeatures{Scale=MatchLowercase}
+
+\usepackage{tgtermes}
+\setmathfont[Ligatures=TeX]{TeX Gyre Termes Math}
+\usepackage{microtype}
+
+
+\usepackage{array, booktabs}
+\usepackage{multicol}
+
+\usepackage{graphicx}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false
+    }
+
+
+\defaultfontfeatures[\sffamily]{Scale=MatchLowercase}
+
+\DeclarePairedDelimiter{\p}{(}{)}
+\DeclarePairedDelimiter{\ket}{\lvert}{\rangle}
+\DeclarePairedDelimiter{\bra}{\langle}{\rvert}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiterX{\inner}[2]{\langle}{\rangle}{#1, #2}
+\DeclarePairedDelimiterX{\set}[1]{\lbrace}{\rbrace}{\def\given{\;\delimsize\vert\;}#1}
+\DeclarePairedDelimiterX{\setBuilder}[2]{\lbrace}{\rbrace}{#1 \;\delimsize\vert\; #2}
+\DeclarePairedDelimiterX{\braket}[2]{\langle}{\rangle}{#1\delimsize\mid#2}
+
+\newcommand{\scl}[1]{\adjustbox{scale=0.8}{#1}}
+
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{quantikz, fit, graphs,graphs.standard, graphdrawing}
+\usegdlibrary{trees,layered}
+
+
+\def\cent{¢}
+
+\newcommand{\tabitem}{~~\llap{--}~~}
+\newcommand\spaceScript[1]{\ensuremath{\scriptscriptstyle(#1)}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+
+% just to make sure it exists
+\providecommand\given{}
+% can be useful to refer to this outside \Set
+\NewDocumentCommand\SetSymbol { O{} }{%
+  \nonscript\:#1\vert
+  \allowbreak
+  \nonscript\:
+  \mathopen{}
+}
+\DeclarePairedDelimiterX\Set[1]\{\}{%
+  \renewcommand\given{\SetSymbol[\delimsize]}
+  #1
+}
+
+\DeclareMathOperator\dd{d}
+\DeclareMathOperator{\cnot}{CNOT}
+\DeclareMathOperator{\cz}{\symtt{CZ}}
+\DeclareMathOperator{\id}{I}
+\newcommand{\paulix}{{\sigma_x}}
+\newcommand{\pauliy}{{\sigma_y}}
+\newcommand{\pauliz}{{\sigma_z}}
+
+
+\definecolor{LinkRed}{HTML}{80171F}
+\definecolor{zx_red}{RGB}{232, 165, 165}
+\definecolor{zx_green}{RGB}{216, 248, 216}
+\definecolor{zx_yellow}{RGB}{247, 247, 219}

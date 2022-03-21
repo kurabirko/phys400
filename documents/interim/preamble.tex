@@ -16,28 +16,11 @@
 % Line height 1.26
 \linespread{1.05}
 
-% Hyperref setup
-% --------------------------------------------------------------- %
-\usepackage{float}
-\usepackage[usenames, dvipsnames, table]{xcolor}
-\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
-
-\definecolor{LinkRed}{HTML}{80171F}
-\definecolor{zx_red}{RGB}{232, 165, 165}
-\definecolor{zx_green}{RGB}{216, 248, 216}
-
-\hypersetup{
-  pdfauthor={Utku Birkan},
-  pdftitle={\OPTTitle},
-  pdfsubject={quantum computing, computer science, graph theory},
-  colorlinks=true,
-  linkcolor=LinkRed,
-  urlcolor=LinkRed,
-  citecolor=LinkRed,
-}
-% --------------------------------------------------------------- %
-
 \input{common/biblatex}
+
+
+
+
 
 \usepackage{caption, subcaption}
 \captionsetup{width=0.87\linewidth}
@@ -94,6 +77,36 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 
+
+% Hyperref setup
+% --------------------------------------------------------------- %
+\usepackage{float}
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+
+\definecolor{LinkRed}{HTML}{80171F}
+\definecolor{zx_red}{RGB}{232, 165, 165}
+\definecolor{zx_green}{RGB}{216, 248, 216}
+
+\hypersetup{
+  pdfauthor={Utku Birkan},
+  pdftitle={\OPTTitle},
+  pdfsubject={quantum computing, computer science, graph theory},
+  colorlinks=true,
+  linkcolor=LinkRed,
+  urlcolor=LinkRed,
+  citecolor=LinkRed,
+}
+
+\directlua{
+  burl = require(package.searchpath('betterurl', './common/?.lua'))
+}
+
+\renewcommand{\url}[1]{\directlua{
+    burl.betterurl(\luastringN{#1})
+  }}
+% --------------------------------------------------------------- %
 
 \input{common/macros}
 

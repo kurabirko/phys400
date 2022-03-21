@@ -200,7 +200,19 @@ This operation can be represented as a diagram as
     d[fill=zx_green] -- e[label={$\scriptscriptstyle \alpha$}]  -- f[label={$\scriptscriptstyle \beta$}] -- g[label={$\scriptscriptstyle \gamma$}] -- h;
   };
 \end{equation}
-where a green vertex ( \tikz {\node[draw, circle, inner sep=1.5pt, fill=zx_green, thick] at (0,0) {};} )  representes a measurement in \(\sigma_z\), and an angle labelled node denotes a measurement along \(\symcal{B}\).
+where a green vertex ( \tikz {\node[draw, circle, inner sep=1.5pt, fill=zx_green, thick] at (0,0) {};} )  representes a measurement in \(\sigma_z\), and an angle labelled vertex denotes a measurement along \(\symcal{B}\). Note that as a special case of this pattern, Hadamard operator can be expressed just by three \(\sigma_y\) measurements.
+\begin{equation}
+  \tikz[ baseline={([yshift=-.5ex]current bounding box.center)} ] \graph [
+    nodes={draw, circle, inner sep=2.5pt, thick},
+    empty nodes,
+    edges = {thick}
+  ] {
+    d[fill=zx_green] -- e[fill=zx_yellow]  -- f[fill=zx_yellow] -- g[fill=zx_yellow] -- h;
+  };
+\end{equation}
+Yellow vertices ( \tikz {\node[draw, circle, inner sep=1.5pt, fill=zx_yellow, thick] at (0,0) {};} ) represent measurements along \(\sigma_y\).
+
+
 
 Simulating \(\cnot\) with a one-way computer is also possible. To do this, we implement the following measurement pattern,
 \begin{equation}
@@ -228,17 +240,29 @@ A measurement of the first two qubits will which resulted in \(s_1=0\) an \(s_2=
   &= ac\ket{00}^{\scriptscriptstyle(34)} + bd\ket{01}^{\scriptscriptstyle(34)} + bc{10}^{\scriptscriptstyle(34)} + ad\ket{11}^{\scriptscriptstyle(34)} \\
   &= \cnot^{\scriptscriptstyle(43)} \ket{\psi_c}^{\scriptscriptstyle(4)} \ket{\psi_i}^{\scriptscriptstyle(3)}
 \end{align}
-Hence the operation implemented \(\cnot\) on the input and control qubits, and wrote the outcome to the output qubit. For different measurement values for \(s_1\) or \(s_2\), \(\cnot\) is implemented up to the following by-product operator.
+Hence the operation implemented \(\cnot\) on the input and control qubits and wrote the outcome to the output qubit. For different measurement values for \(s_1\) or \(s_2\), \(\cnot\) is implemented up to the following by-product operator.
 \begin{equation}
   U_{\Sigma, \cnot} = \left(\sigma_x^{\scriptscriptstyle(3)}\right)^{s_2} \left(\sigma_z^{\scriptscriptstyle(3)}\right)^{s_1}\left(\sigma_z^{\scriptscriptstyle(4)}\right)^{s_1}
 \end{equation}
 
-As we have shown, both \(\cnot\) and arbitrary rotation gates can be implemented on a one-way computer. Therefore, it is possible to simulate any computation that is possible on a quantum circuit with a one-way quantum computer, as described by the Figure \ref{fig:flow}.
+As we have shown, both \(\cnot\) and arbitrary rotation gates can be implemented on a one-way computer. Therefore, it is possible to simulate any computation that is possible on a quantum circuit with a one-way quantum computer by combining these measurement patterns, as described by Figure \ref{fig:flow}.
 
-\begin{figure}[hbt]
+\begin{figure}[htb]
   \centering
   \includegraphics[
     width=0.75\textwidth
     ]{fig/flow.eps}
-  \caption{Simulation of a quantum circuit with a one-way computer. Horizontal direction simulates the circuit's time evolution and vertical direction represents the qubit register. \(\odot\) vertices denote a measurement along \(\sigma_z\), a vertical arrow denotes a measurement along \(\sigma_x\) and a tilted arrow denotes a measurement along \((\sigma_x + \sigma_y)/\sqrt2\). The image by Raussendorf et. al.\cite{russendorf2003} \label{fig:flow}}
+  \caption{Simulation of a quantum circuit with a one-way computer. Horizontal direction simulates the circuit's time evolution and vertical direction represents the qubit register. \(\odot\) vertices denote a measurement along \(\sigma_z\), a vertical arrow denotes a measurement along \(\sigma_x\) and a tilted arrow denotes a measurement along the \(xy\) plane. The image by Raussendorf et. al.\cite{russendorf2003}} \label{fig:flow}
 \end{figure}
+
+After introducing a general framework for simulating quantum circuits, we introduce two additional measurement patterns. The first one among these is a measurement by \(\sigma_z\). This measurement effectively deletes a vertex from the cluster without affecting the program logic. A 2 qubit cluster state with an input \(\ket{\psi} = a\ket0+b\ket1\) has the following quantum state.
+\begin{align}
+  \ket{G} &= CZ\ket\psi\ket+\\
+  &= \frac{1}{\sqrt2}(a\ket{00} + a\ket{01} + b\ket{10} - b\ket{11})
+\end{align}
+Measuring the second qubit will yield \(a\ket0+b\ket1\) if the outcome is 0, and it will yield \(a\ket0-b\ket1\) if otherwise. So a measurement on \(\sigma_z\) removes the qubit with a side effect operator \(\sigma_z^s\).
+
+The last measurement pattern is the \(\sigma_x\) measurement, which propagates the information in a linear cluster to the next vertex. The by-product operators are cyclic, with a period of four propagations.
+\begin{equation}
+  U_\Sigma =  \sigma_x^{s_1} \sigma_z^{s_2}
+\end{equation}
