@@ -13,6 +13,9 @@ jobs:
         documents:
           - proposal
           - interim
+          - final
+          - poster
+          - presentation
 
     steps:
       - uses: actions/checkout@v2
